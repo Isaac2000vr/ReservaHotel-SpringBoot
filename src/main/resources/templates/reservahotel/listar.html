@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Reservas - Spring Boot</title>
+</head>
+<body>
+    <div style="margin: 20px;">
+        <h2>Gestión de Reservas de Hotel (Ejercicio N.º 31)</h2>
+        <a th:href="@{/}">← Volver al Menú Principal</a> | 
+        <a th:href="@{/reservas/nueva}">+ Agregar Nueva Reserva</a>
+        <hr/>
+
+        <div th:if="${param.mensaje}" style="color: green;" th:text="${param.mensaje}"></div>
+
+        <h3>Filtros y Reportes Parametrizados (Reserva Hotel)</h3>
+        
+        <!-- Reporte 1: Por Ciudad -->
+        <form th:action="@{/reservas/reporte/ciudad}" method="get" style="display: inline-block; margin-right: 20px;">
+            <label>Filtrar por Ciudad:</label>
+            <input type="text" name="ciudad" placeholder="Ciudad..." required="required"/>
+            <button type="submit">Buscar por Ciudad</button>
+        </form>
+
+        <!-- Reporte 2: Por Empleado y Rango de Fechas -->
+        <form th:action="@{/reservas/reporte/empleado}" method="get" style="display: inline-block;">
+            <label>Empleado Atiende:</label>
+            <select name="empleadoId" required="required">
+                <option th:each="emp : ${usuarios}" th:value="${emp.id}" th:text="${emp.nombre}"></option>
+            </select>
+            <label>Desde:</label>
+            <input type="date" name="desde" required="required"/>
+            <label>Hasta:</label>
+            <input type="date" name="hasta" required="required"/>
+            <button type="submit">Reporte por Empleado & Fechas</button>
+            <a th:href="@{/reservas}">Limpiar Filtros</a>
+        </form>
+
+        <br/><br/>
+        <table border="1" cellpadding="6" cellspacing="0" style="width: 100%;">
+            <thead style="background-color: #e9e9e9;">
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Hotel</th>
+                    <th>Huésped</th>
+                    <th>Inicio / Fin</th>
+                    <th>Valor</th>
+                    <th>Hab.</th>
+                    <th>Ciudad</th>
+                    <th>Empleado Atiende</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="r : ${reservas}">
+                    <td th:text="${r.id}">1</td>
+                    <td th:text="${r.fecha}">2026-09-17</td>
+                    <td th:text="${r.hotel}">Hotel Plaza</td>
+                    <td th:text="${r.huesped}">Juan Pérez</td>
+                    <td th:text="${r.fechaInicio + ' al ' + r.fechaFin}">2026-09-17 al 2026-09-20</td>
+                    <td th:text="${'$' + r.valor}">$150000</td>
+                    <td th:text="${r.habitacion}">101</td>
+                    <td th:text="${r.ciudad}">Bogotá</td>
+                    <td th:text="${r.empleadoAtiende != null ? r.empleadoAtiende.nombre : 'N/A'}">Empleado</td>
+                    <td>
+                        <a th:href="@{'/reservas/editar/' + ${r.id}}">Editar</a> | 
+                        <a th:href="@{'/reservas/eliminar/' + ${r.id}}" onclick="return confirm('¿Seguro de eliminar esta reserva?');">Eliminar</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(reservas)}">
+                    <td colspan="10" style="text-align: center; color: gray;">No se encontraron reservas registradas.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

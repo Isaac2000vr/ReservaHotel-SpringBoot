@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Clave - Spring Boot</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>Recuperación de Contraseña</h2>
+        <hr style="width: 50%;"/>
+        
+        <div th:if="${mensaje}" style="color: green; font-weight: bold;" th:text="${mensaje}"></div>
+        <div th:if="${error}" style="color: red; font-weight: bold;" th:text="${error}"></div>
+        
+        <form th:action="@{/recuperar}" method="post" style="display: inline-block; text-align: left; margin-top: 20px;">
+            <p>
+                <label>Ingresa tu correo registrado:</label><br/>
+                <input type="email" name="email" required="required" placeholder="admin@reservahotel.com"/>
+            </p>
+            <p>
+                <button type="submit">Enviar Nueva Clave</button>
+            </p>
+        </form>
+        <br/><br/>
+        <a th:href="@{/login}">Volver al Inicio de Sesión</a>
+    </div>
+</body>
+</html>

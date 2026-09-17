@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú Principal - Spring Boot MVC</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 30px;">
+        <h2>Menú de la Aplicación (Spring Boot MVC + Thymeleaf)</h2>
+        <p>Bienvenido, <strong th:text="${session.usuarioLogin != null ? session.usuarioLogin.nombre : 'Usuario'}">Usuario</strong></p>
+        <hr style="width: 60%;"/>
+        
+        <table border="1" cellpadding="10" cellspacing="0" style="margin: 0 auto; width: 40%;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>Módulo de Gestión</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Gestión de Usuarios</strong></td>
+                    <td>
+                        <a th:href="@{/usuarios}">Listar / Administrar Usuarios</a> | 
+                        <a th:href="@{/usuarios/nuevo}">Agregar Usuario</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Gestión de Reservas de Hotel</strong></td>
+                    <td>
+                        <a th:href="@{/reservas}">Listar / Administrar Reservas</a> | 
+                        <a th:href="@{/reservas/nueva}">Agregar Reserva</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center; background-color: #fff0f0;">
+                        <a th:href="@{/logout}" style="color: red; font-weight: bold;">Cerrar Sesión</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

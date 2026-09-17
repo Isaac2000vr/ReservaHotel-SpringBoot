@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión - Reserva Hotel Spring Boot</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>Iniciar Sesión en el Sistema (Spring Boot MVC)</h2>
+        <hr style="width: 50%;"/>
+        
+        <div th:if="${error}" style="color: red; font-weight: bold;" th:text="${error}"></div>
+        <div th:if="${param.mensaje}" style="color: green;" th:text="${param.mensaje}"></div>
+        
+        <form th:action="@{/login}" method="post" style="display: inline-block; text-align: left; margin-top: 20px;">
+            <p>
+                <label>Email:</label><br/>
+                <input type="email" name="email" required="required"/>
+            </p>
+            <p>
+                <label>Clave:</label><br/>
+                <input type="password" name="clave" required="required"/>
+            </p>
+            <p>
+                <button type="submit">ENTRAR</button>
+            </p>
+        </form>
+        <br/><br/>
+        <a th:href="@{/recuperar}">¿Olvidaste tu contraseña? Recuperar clave aquí</a>
+    </div>
+</body>
+</html>

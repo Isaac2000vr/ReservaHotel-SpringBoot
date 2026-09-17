@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Usuario - Spring Boot</title>
+</head>
+<body>
+    <div style="margin: 20px;">
+        <h2 th:text="${usuario.id != null ? 'Editar Usuario' : 'Nuevo Usuario'}">Formulario Usuario</h2>
+        <a th:href="@{/usuarios}">← Volver al Listado de Usuarios</a>
+        <hr/>
+
+        <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post" style="width: 400px;">
+            <input type="hidden" th:field="*{id}"/>
+
+            <p>
+                <label>Nombre:</label><br/>
+                <input type="text" th:field="*{nombre}" required="required" style="width: 100%;"/>
+            </p>
+
+            <p>
+                <label>Email:</label><br/>
+                <input type="email" th:field="*{email}" required="required" style="width: 100%;"/>
+            </p>
+
+            <p>
+                <label>Clave:</label><br/>
+                <input type="password" th:field="*{clave}" required="required" style="width: 100%;"/>
+            </p>
+
+            <p>
+                <label>Rol:</label><br/>
+                <select th:field="*{rol}" style="width: 100%;">
+                    <option value="admin">Administrador</option>
+                    <option value="empleado">Empleado</option>
+                </select>
+            </p>
+
+            <p>
+                <button type="submit">Guardar Usuario</button>
+            </p>
+        </form>
+    </div>
+</body>
+</html>

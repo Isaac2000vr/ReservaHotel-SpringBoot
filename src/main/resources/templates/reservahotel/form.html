@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Reserva Hotel - Spring Boot</title>
+</head>
+<body>
+    <div style="margin: 20px;">
+        <h2 th:text="${reserva.id != null ? 'Editar Reserva de Hotel' : 'Nueva Reserva de Hotel'}">Formulario Reserva</h2>
+        <a th:href="@{/reservas}">← Volver al Listado de Reservas</a>
+        <hr/>
+
+        <form th:action="@{/reservas/guardar}" th:object="${reserva}" method="post" style="width: 500px;">
+            <input type="hidden" th:field="*{id}"/>
+
+            <p>
+                <label>Fecha de Registro:</label><br/>
+                <input type="date" th:field="*{fecha}" required="required"/>
+            </p>
+
+            <p>
+                <label>Nombre del Hotel:</label><br/>
+                <input type="text" th:field="*{hotel}" required="required" style="width: 100%;"/>
+            </p>
+
+            <p>
+                <label>Nombre del Huésped:</label><br/>
+                <input type="text" th:field="*{huesped}" required="required" style="width: 100%;"/>
+            </p>
+
+            <p>
+                <label>Fecha Inicio (Check-in):</label><br/>
+                <input type="date" th:field="*{fechaInicio}" required="required"/>
+            </p>
+
+            <p>
+                <label>Fecha Fin (Check-out):</label><br/>
+                <input type="date" th:field="*{fechaFin}" required="required"/>
+            </p>
+
+            <p>
+                <label>Valor Total ($):</label><br/>
+                <input type="number" step="0.01" th:field="*{valor}" required="required"/>
+            </p>
+
+            <p>
+                <label>Habitación / Número:</label><br/>
+                <input type="text" th:field="*{habitacion}" required="required"/>
+            </p>
+
+            <p>
+                <label>Número de Acompañantes:</label><br/>
+                <input type="number" th:field="*{numAcompanantes}" required="required"/>
+            </p>
+
+            <p>
+                <label>País:</label><br/>
+                <input type="text" th:field="*{pais}" required="required"/>
+            </p>
+
+            <p>
+                <label>Departamento:</label><br/>
+                <input type="text" th:field="*{departamento}" required="required"/>
+            </p>
+
+            <p>
+                <label>Ciudad:</label><br/>
+                <input type="text" th:field="*{ciudad}" required="required"/>
+            </p>
+
+            <p>
+                <label>Hora Check-in (HH:mm):</label><br/>
+                <input type="time" th:field="*{horaCheckin}" required="required"/>
+            </p>
+
+            <p>
+                <label>Hora Check-out (HH:mm):</label><br/>
+                <input type="time" th:field="*{horaCheckout}" required="required"/>
+            </p>
+
+            <p>
+                <label>Empleado que Atiende:</label><br/>
+                <select th:field="*{empleadoAtiende.id}" required="required" style="width: 100%;">
+                    <option th:each="emp : ${usuarios}" th:value="${emp.id}" th:text="${emp.nombre}"></option>
+                </select>
+            </p>
+
+            <p>
+                <label>Empleado que Despide (Opcional):</label><br/>
+                <select th:field="*{empleadoDespide.id}" style="width: 100%;">
+                    <option value="">-- Ninguno / Seleccionar --</option>
+                    <option th:each="emp : ${usuarios}" th:value="${emp.id}" th:text="${emp.nombre}"></option>
+                </select>
+            </p>
+
+            <p>
+                <label>Descripción / Observaciones:</label><br/>
+                <textarea th:field="*{descripcion}" rows="3" style="width: 100%;"></textarea>
+            </p>
+
+            <p>
+                <button type="submit">Guardar Reserva</button>
+            </p>
+        </form>
+    </div>
+</body>
+</html>
