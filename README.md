@@ -38,4 +38,4 @@ Instrucciones de Ejecución Local
 bash
 ./mvnw spring-boot:run
 
-Acceder en el navegador a: http://localhost:8080
+Acceder en el navegador a: https://reservahotel-springboot.onrender.com/
